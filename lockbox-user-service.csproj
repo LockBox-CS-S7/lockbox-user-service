@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>lockbox_file_service</RootNamespace>
+    <RootNamespace>lockbox_user_service</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

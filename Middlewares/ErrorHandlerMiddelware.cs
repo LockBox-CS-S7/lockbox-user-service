@@ -1,4 +1,4 @@
-namespace lockbox_file_service.Middlewares;
+namespace lockbox_user_service.Middlewares;
 
 class ErrorHandlerMiddleware
 {

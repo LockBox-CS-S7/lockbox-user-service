@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace lockbox_file_service.Requirement;
+namespace lockbox_user_service.Requirement;
 
 class RbacRequirement : IAuthorizationRequirement
 {

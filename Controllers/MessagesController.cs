@@ -1,9 +1,9 @@
-using lockbox_file_service.Models;
-using lockbox_file_service.Services;
+using lockbox_user_service.Models;
+using lockbox_user_service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace lockbox_file_service.Controllers;
+namespace lockbox_user_service.Controllers;
 
 [ApiController]
 [Route("api/messages")]

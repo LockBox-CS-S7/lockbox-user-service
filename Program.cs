@@ -1,7 +1,7 @@
-using lockbox_file_service.Authorization;
-using lockbox_file_service.Middlewares;
-using lockbox_file_service.Requirement;
-using lockbox_file_service.Services;
+using lockbox_user_service.Authorization;
+using lockbox_user_service.Middlewares;
+using lockbox_user_service.Requirement;
+using lockbox_user_service.Services;
 using dotenv.net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 
 
-namespace lockbox_file_service;
+namespace lockbox_user_service;
 
 public class Program
 {

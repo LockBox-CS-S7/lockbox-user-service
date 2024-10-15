@@ -1,4 +1,4 @@
-namespace lockbox_file_service.Models;
+namespace lockbox_user_service.Models;
 
 public class Message
 {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace lockbox_file_service.Controllers;
+namespace lockbox_user_service.Controllers;
 
 [ApiController]
 public class ErrorController : ControllerBase

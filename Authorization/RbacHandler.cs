@@ -1,7 +1,7 @@
-using lockbox_file_service.Requirement;
+using lockbox_user_service.Requirement;
 using Microsoft.AspNetCore.Authorization;
 
-namespace lockbox_file_service.Authorization;
+namespace lockbox_user_service.Authorization;
 
 class RbacHandler : AuthorizationHandler<RbacRequirement>
 {

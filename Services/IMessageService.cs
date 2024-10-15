@@ -1,6 +1,6 @@
-using lockbox_file_service.Models;
+using lockbox_user_service.Models;
 
-namespace lockbox_file_service.Services;
+namespace lockbox_user_service.Services;
 
 public interface IMessageService
 {
