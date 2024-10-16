@@ -2,7 +2,9 @@ name: dotnet Snyk SAST
 
 on: 
   push:
-    branches: ["main"]
+    branches: ["main", "development"]
+  pull_request:
+    branches: ["main", "development"]
 
 permissions:
   contents: read
@@ -17,7 +19,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.x'  # or specify the version you are using
+          dotnet-version: '8.x'  # or specify the version you are using
       
       - name: Restore .NET dependencies
         run: dotnet restore
