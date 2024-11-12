@@ -1,12 +1,11 @@
 using lockbox_user_service.Models;
 using lockbox_user_service.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lockbox_user_service.Controllers;
 
 [ApiController]
-[Route("/users")]
+[Route("/api/users")]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -17,9 +16,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("admin")]
-    public async Task<ActionResult<User?>> GetUserByEmail(string email)
+    public async Task<ActionResult<string?>> GetUserById(string id)
     {
-        return await _userService.GetUserById(email);
+        return await _userService.GetUserById(id);
     }
 
     [HttpPost("admin")]

@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
+using dotenv.net;
 using lockbox_user_service.Models;
 
 namespace lockbox_user_service.Services;
@@ -20,8 +21,9 @@ public class Auth0UserService : IUserService
     // Define a class to deserialize token response JSON
     private class TokenResponse
     {
-        public string AccessToken { get; set; }
-        public int ExpiresIn { get; set; }
+        public string access_token { get; set; }
+        public int expires_in { get; set; }
+        // public string token { get; set; }
     }
     
     private async Task<string> GetAccessTokenAsync()
@@ -31,10 +33,10 @@ public class Auth0UserService : IUserService
             return _accessToken; // Use cached token if not expired
         }
 
-        var domain = _configuration["Auth0:Domain"];
-        var clientId = _configuration["Auth0:ClientId"];
-        var clientSecret = _configuration["Auth0:ClientSecret"];
-        var audience = _configuration["Auth0:Audience"];
+        var domain = _configuration["AUTH0_DOMAIN"];
+        var clientId = _configuration["CLIENT_ID"];
+        var clientSecret = _configuration["CLIENT_SECRET"];
+        var audience = _configuration["AUTH0_AUDIENCE"];
 
         var tokenRequest = new HttpRequestMessage(HttpMethod.Post, $"https://{domain}/oauth/token");
         tokenRequest.Content = new FormUrlEncodedContent(new[]
@@ -50,8 +52,8 @@ public class Auth0UserService : IUserService
 
         var json = await response.Content.ReadAsStringAsync();
         var tokenData = JsonSerializer.Deserialize<TokenResponse>(json);
-        _accessToken = tokenData.AccessToken;
-        _tokenExpiry = DateTime.UtcNow.AddSeconds(tokenData.ExpiresIn);
+        _accessToken = tokenData.access_token;
+        _tokenExpiry = DateTime.UtcNow.AddSeconds(tokenData.expires_in);
 
         return _accessToken;
     }
@@ -60,10 +62,10 @@ public class Auth0UserService : IUserService
     private async Task<string> GetUserDetailsAsync(string userId)
     {
         var token = await GetAccessTokenAsync();
-        var request = new HttpRequestMessage(HttpMethod.Get, $"{_configuration["Auth0:Audience"]}users/{userId}"); // TODO: use correct url
+        var request = new HttpRequestMessage(HttpMethod.Get, $"https://{_configuration["AUTH0_DOMAIN"]}/api/v2/users/{userId}");
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        var response = await _httpClient.SendAsync(request);
+        var response = await _httpClient.SendAsync(request); // TODO: Response is still 'unauthorised'
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
@@ -79,10 +81,10 @@ public class Auth0UserService : IUserService
     }
     
     
-    public async Task<User?> GetUserById(string id)
+    public async Task<string?> GetUserById(string id)
     {
         var userDetails = await GetUserDetailsAsync(id);
-        throw new NotImplementedException();
+        return userDetails;
     }
 
     public async Task<bool> DeleteUserById(string id)

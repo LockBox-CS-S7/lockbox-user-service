@@ -29,6 +29,9 @@ public class Program
         });
         
         // Add services to the container.
+        builder.Services.AddHttpClient<IUserService, Auth0UserService>();
+        builder.Services.AddScoped<IUserService, Auth0UserService>();
+        
         builder.Services.AddScoped<IMessageService, MessageService>();
         builder.Services.AddCors(options => {
             options.AddDefaultPolicy(policy => {
