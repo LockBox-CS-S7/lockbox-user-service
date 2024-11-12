@@ -6,6 +6,7 @@ namespace lockbox_user_service.Controllers;
 [ApiController]
 public class ErrorController : ControllerBase
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("/error")]
     public IActionResult HandleErrorDevelopment(
         [FromServices] IHostEnvironment hostEnvironment)
