@@ -52,6 +52,12 @@ public class Auth0UserService : IUserService
 
         var json = await response.Content.ReadAsStringAsync();
         var tokenData = JsonSerializer.Deserialize<TokenResponse>(json);
+
+        if (tokenData == null)
+        {
+            throw new Exception("Could not find token data in response");
+        }
+        
         _accessToken = tokenData.access_token;
         _tokenExpiry = DateTime.UtcNow.AddSeconds(tokenData.expires_in);
 
