@@ -30,6 +30,7 @@ public class Program
         
         // Add services to the container.
         builder.Services.AddScoped<IMessageService, MessageService>();
+        builder.Services.AddScoped<IAccountService, Auth0AccountService>();
         builder.Services.AddCors(options => {
             options.AddDefaultPolicy(policy => {
                 policy.WithOrigins(
