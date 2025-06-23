@@ -1,3 +1,5 @@
+using lockbox_user_service.Messaging;
+
 namespace lockbox_user_service.Services;
 
 /// <summary>
@@ -5,10 +7,19 @@ namespace lockbox_user_service.Services;
 /// </summary>
 public class Auth0AccountService : IAccountService
 {
-    public void DeleteUserAccount(string id)
+    private const string AccountQueue = "account-queue";
+    
+    public async Task DeleteUserAccount(string id)
     {
         Console.WriteLine($"Deleted user account with id: {id}");
-        
-        // TODO: Send message to RabbitMQ broker (CloudAMQP)
+        using RabbitMqClient client = await RabbitMqClient.CreateAsync(AccountQueue);
+
+        var now = DateTime.UtcNow;
+        var message = new AccountMessage(
+            "ACCOUNT_DELETION_REQUESTED", 
+            $"{now.ToLongTimeString()} - {now.ToLongDateString()}", 
+            id, 
+            "The user has requested their account to be deleted.");
+        await client.SendMessageAsync(message);
     }
 }

@@ -21,7 +21,7 @@ public class AccountController : ControllerBase
     [Authorize]
     public ActionResult DeleteAccount([FromBody] string accountId)
     {
-        _logger.LogInformation("Account deletion requested for user id: {}", accountId);
+        _logger.LogInformation("Account deletion requested for user with id: {}", accountId);
         try
         {
             _accountService.DeleteUserAccount(accountId);
