@@ -19,12 +19,12 @@ public class AccountController : ControllerBase
 
     [HttpPost("delete-account")]
     [Authorize]
-    public ActionResult DeleteAccount([FromBody] string accountId)
+    public ActionResult DeleteAccount([FromBody] DeleteAccountRequestBody body)
     {
-        _logger.LogInformation("Account deletion requested for user with id: {}", accountId);
+        _logger.LogInformation("Account deletion requested for user with id: {}", body.AccountId);
         try
         {
-            _accountService.DeleteUserAccount(accountId);
+            _accountService.DeleteUserAccount(body.AccountId);
         }
         catch (Exception e)
         {
@@ -34,4 +34,9 @@ public class AccountController : ControllerBase
         
         return Ok();
     }
+}
+
+public class DeleteAccountRequestBody
+{
+    public string AccountId { get; set; }
 }
